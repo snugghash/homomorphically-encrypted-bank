@@ -1,7 +1,13 @@
 # Zero-knowledge bank
 
 ## Idea, motivation and executive summary
-Data leakage and trust is a consistent problem across the tech world. This project aims to demonstrate a scalable, comparable-cost, *private* alternative to a traditional, trust-based bank. The technology that enables this is homomorphic encryption.
+Under new GDPR laws, each record of personal/private information (PPI) exposed costs a company $500. 
+In 2017 alone, it would've costed all the companies 90 bil for data breaches if prosecuted according to new laws. What if we 
+could perform all business functions while *not storing that data*? I'm developing 
+a system (dashboard, app) that demonstrates *scalable homomorphic computation* to enable credit card companies 
+to offer their services to randomly generated consumers while keeping all data private. This also opens 
+up miraculous use cases creating entirely new markets, blue oceans, for people to collaborate privately, 
+organize, based on **ultra** private data that was previously untappable. 
 
 ## Data source and size
 Random generation of *n* transactions between *p* legal entities. Size is arbitrary.
