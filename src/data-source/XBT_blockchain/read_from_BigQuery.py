@@ -57,5 +57,18 @@ def get_relevant_info_as_dict(results):
 
 
 
+def estimate_gigabytes_scanned(query, client):
+    """
+    https://www.kaggle.com/sohier/beyond-queries-exploring-the-bigquery-api
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs#configuration.dryRun
+    """
+    my_job_config = bigquery.job.QueryJobConfig()
+    my_job_config.dry_run = True
+    my_job = client.query(query, job_config=my_job_config)
+    BYTES_PER_GB = 2**30
+    return my_job.total_bytes_processed / BYTES_PER_GB
+
+
+
 if __name__ == "__main__":
     main()
