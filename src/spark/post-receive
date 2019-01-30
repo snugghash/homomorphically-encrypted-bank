@@ -1,0 +1,2 @@
+# Git post-receive hook for running spark job on master cluster
+spark-submit job.py
