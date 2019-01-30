@@ -15,5 +15,7 @@
 20190129
 - 1200; Testing [PySEAL](https://github.com/Lab41/PySEAL) locally.
 - 1600; Spark+Kafka worked on Friday, seems like the tear down process and using new VPC+SG screwed up something. Debugging communication for both services.
+- 1730: Kafka's broken without specifically installing things.
+- 1746; tip: that `bc` missing error? That breaks zookeeper, prevents it from running. EIther way, kafka is a add-on for me, not par tof MVP. Focusing on spark.
 
 
