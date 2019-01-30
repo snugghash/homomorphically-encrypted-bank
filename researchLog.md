@@ -18,5 +18,5 @@
 - 1730: Kafka's broken without specifically installing things.
 - 1746; tip: that `bc` missing error? That breaks zookeeper, prevents it from running. EIther way, kafka is a add-on for me, not par tof MVP. Focusing on spark.
 - 1750; tip: Use different keys and sec groups for all clusters so we can work with the parallely.
-
-
+- 1920; Depending upon parameters of encryption, there's a certain noise budget associated with each ciphertext. Each comupation reduces it, addition is negligible compared to multiplication. Once used up, the ciphertexts then become undecryptable, they're garbage.
+- 1922; idea; implement private set intersection as a continuous stream for drivers on freeway, no one knows their whereabouts except the people who match with then, then they send over an E2E profile, they accept/deny, then they pick up along route. Talk with the guy implementing the other part.
