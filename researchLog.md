@@ -25,3 +25,5 @@
 - 1018; No luck getting spark to accept a job
 - 1118; "There is no such a thing as a temporary change or workaround: In most cases, workarounds are tech debt."
 - 1200; Done with rebuilding ingestion, possibly direct to spark as a batch this time.
+20190131
+- 0908; Switching to ETH blockchain to simulate transaction as the protocol has an address-transaction model as opposed to BTC's address-changes-every-transaction privacy model.
