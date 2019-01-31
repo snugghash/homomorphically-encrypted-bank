@@ -610,6 +610,7 @@ def example_weighted_average():
 
 	# We create a vector of ciphertexts for encrypting the rational numbers.
 	encrypted_rationals = []
+	noise_budgets = []
 	rational_numbers_string = "Encoding and encrypting: "
 	for i in range(10):
 		# We create our Ciphertext objects into the vector by passing the
@@ -625,7 +626,11 @@ def example_weighted_average():
 		encryptor.encrypt(encoder.encode(rational_numbers[i]), encrypted_rationals[i])
 		rational_numbers_string += (str)(rational_numbers[i])[:6]
 		if i < 9: rational_numbers_string += ", "
+		noise_budgets.append((str)(decryptor.invariant_noise_budget(encrypted_rationals[i])))
 	print(rational_numbers_string)
+	print("Noise budget in each: ")
+	print(", ".join(noise_budgets))
+	print(" bits")
 
 	# Next we encode the coefficients. There is no reason to encrypt these since they
 	# are not private data.
