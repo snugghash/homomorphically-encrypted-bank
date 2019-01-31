@@ -9,6 +9,8 @@ to offer their services to randomly generated consumers while keeping all data p
 up miraculous use cases creating entirely new markets, blue oceans, for people to collaborate privately, 
 organize, based on **ultra** private data that was previously untappable. 
 
+![Average number of data breaches and exposed records, from statista](./statistic_id273550_cyber-crime_-number-of-breaches-and-records-exposed-2005-2018-e1535023390184.png)
+
 ## Data source and size
 Random generation of *n* transactions between *p* legal entities. Size is arbitrary.
 Possibly using the blockchain dataset to approximate real transactions between addresses.
