@@ -1,2 +1,2 @@
 # Git post-receive hook for running spark job on master cluster
-spark-submit job.py
+PYSPARK_PYTHON=python3 spark-submit --master=spark://ip-10-0-0-248.us-west-2.compute.internal:7077 job.py
