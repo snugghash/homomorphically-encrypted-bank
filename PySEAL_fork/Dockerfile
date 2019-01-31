@@ -33,7 +33,6 @@ RUN make
 
 # Build SEAL Python wrapper
 COPY /SEALPython /SEAL/SEALPython
-COPY /SEALPythonExamples /SEAL/SEALPythonExamples
 WORKDIR /SEAL/SEALPython
 RUN pip3 install --upgrade pip
 RUN pip3 install setuptools
@@ -44,6 +43,7 @@ RUN git checkout a303c6fc479662fd53eaa8990dbc65b7de9b7deb
 WORKDIR /SEAL/SEALPython
 RUN python3 setup.py build_ext -i
 ENV PYTHONPATH $PYTHONPATH:/SEAL/SEALPython:/SEAL/bin
+COPY /SEALPythonExamples /SEAL/SEALPythonExamples
 
 # Return to SEAL root directory
 WORKDIR /SEAL
