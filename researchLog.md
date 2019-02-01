@@ -27,3 +27,5 @@
 - 1200; Done with rebuilding ingestion, possibly direct to spark as a batch this time.
 20190131
 - 0908; Switching to ETH blockchain to simulate transaction as the protocol has an address-transaction model as opposed to BTC's address-changes-every-transaction privacy model.
+20190201
+- 1107; AWS lambda fn for HE? But no parallelization, no joy.
