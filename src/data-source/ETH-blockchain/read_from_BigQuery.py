@@ -3,6 +3,7 @@ TODO Actually implement scalable reading, move that for loop over, run a functio
 """
 from google.cloud import bigquery
 from pprint import pprint
+from datetime import datetime
 
 
 
@@ -26,7 +27,7 @@ def get_data_from_big_query(starting_from_index, number_of_rows):
 
     schema_subset = [
         col for col in transactions_table_ref.schema
-        if col.name in ('inputs', 'outputs', 'transaction_id', 'timestamp')
+        if col.name in ('from_address', 'to_address', 'block_number', 'block_timestamp', 'value')
     ]
     return [
         x for x in client.list_rows(
@@ -41,24 +42,13 @@ def get_data_from_big_query(starting_from_index, number_of_rows):
 def get_relevant_info_as_dict(results):
     """
     Returns relevant info: inputs, outputs, etc. in dict, given dict
+    TODO perhaps make this a fn which only acts on one row, and RF out the rest
     """
     formatted = []
     for row in results:
         dict_row = dict(row)
-        formatted_row = {}
-        formatted_row['inputs'] = []
-        for i in dict_row['inputs']:
-            formatted_row['inputs'].append({'from': i['input_pubkey_base58']})
-            # Note: BTC has no concept of addresses. ALL the amount from ALL addresses here is taken, then distributed as the outputs describe.
-        formatted_row['outputs'] = []
-        for i in dict_row['outputs']:
-            formatted_row['outputs'].append({
-                'to': i['output_pubkey_base58'],
-                'amount': i['output_satoshis']
-            })
-        formatted_row['timestamp'] = dict_row['timestamp']
-        formatted_row['id'] = dict_row['transaction_id']
-        formatted.append(formatted_row)
+        # TODO dict_row['block_timestamp'] = datetime(dict_row['block_timestamp']).utcnow()
+        formatted.append(dict_row)
     return formatted
 
 
