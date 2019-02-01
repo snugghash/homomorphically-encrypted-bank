@@ -44,7 +44,6 @@ WORKDIR /SEAL/SEALPython
 RUN python3 setup.py build_ext -i
 ENV PYTHONPATH $PYTHONPATH:/SEAL/SEALPython:/SEAL/bin
 COPY /SEALPythonExamples /SEAL/SEALPythonExamples
-COPY ../var/amount.txt /SEAL/SEALPythonExamples
 
 # Return to SEAL root directory
 WORKDIR /SEAL
