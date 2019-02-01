@@ -17,7 +17,7 @@ def get_data_from_big_query(starting_from_index, number_of_rows):
     Read arbitrary number from BigQuery, does NOT scale
     """
     client = bigquery.Client.from_service_account_json(
-        'scalable-homom-encryp-2e445d235e13.json',
+        'scalable-homom-encryp-c5d5f9e88750.json',
         project='bigquery-public-data')
 
     reference = client.dataset('ethereum_blockchain')
