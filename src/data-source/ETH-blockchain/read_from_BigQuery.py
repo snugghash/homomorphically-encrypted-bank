@@ -15,9 +15,6 @@ def main():
 
 
 
-
-
-
 def get_data_from_big_query(starting_from_index, number_of_rows):
     """
     Read arbitrary number from BigQuery, does NOT scale
@@ -53,7 +50,7 @@ def get_relevant_info_as_dict(results):
     for row in results:
         dict_row = dict(row)
         # TODO dict_row['block_timestamp'] = datetime(dict_row['block_timestamp']).utcnow()
-        dict_row['value'] = str(dict_row['value'])
+        dict_row['value'] = str(dict_row['value']/10**18) # Store value in ether, converted from wei (1 wei = 10^-18 ETH)
         formatted.append(dict_row)
     return formatted
 
