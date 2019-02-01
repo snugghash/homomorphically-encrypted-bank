@@ -9,7 +9,12 @@ from datetime import datetime
 
 def main():
     data = get_data_from_big_query(0, 10)
-    pprint(get_relevant_info_as_dict(data))
+    formatted_data = get_relevant_info_as_dict(data)
+    with open("../../../var/amount.txt", "w") as outfile:
+        outfile.write("\n".join([i['value'] for i in formatted_data]))
+
+
+
 
 
 
@@ -48,6 +53,7 @@ def get_relevant_info_as_dict(results):
     for row in results:
         dict_row = dict(row)
         # TODO dict_row['block_timestamp'] = datetime(dict_row['block_timestamp']).utcnow()
+        dict_row['value'] = str(dict_row['value'])
         formatted.append(dict_row)
     return formatted
 
