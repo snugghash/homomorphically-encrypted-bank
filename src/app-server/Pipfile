@@ -7,6 +7,14 @@ verify_ssl = true
 
 [packages]
 flask = "*"
+flask-admin = "*"
+flask-bcrypt = "*"
+flask-dance = "*"
+flask-pymongo = "*"
+flask-openid = "*"
+flask-testing = "*"
+flask-user = "*"
+flask-webtest = "*"
 
 [requires]
 python_version = "3.7"
