@@ -29,3 +29,4 @@
 - 0908; Switching to ETH blockchain to simulate transaction as the protocol has an address-transaction model as opposed to BTC's address-changes-every-transaction privacy model.
 20190201
 - 1107; AWS lambda fn for HE? But no parallelization, no joy.
+- 1850; Three TODOs - Implement Big Poly Array, conversion from ciphertext to it, then the addition. Interprocess communication/savings = nil.
