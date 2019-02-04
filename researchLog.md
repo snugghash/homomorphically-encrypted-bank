@@ -30,3 +30,5 @@
 20190201
 - 1107; AWS lambda fn for HE? But no parallelization, no joy.
 - 1850; Three TODOs - Implement Big Poly Array, conversion from ciphertext to it, then the addition. Interprocess communication/savings = nil.
+20190204
+- 1339: Reasons to use Kafka+Spark: good integrations and docuemntation, support present
