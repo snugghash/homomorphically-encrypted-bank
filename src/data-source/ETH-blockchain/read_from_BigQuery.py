@@ -1,15 +1,21 @@
 """
-TODO Actually implement scalable reading, move that for loop over, run a function inside loop or maybe micro batch with 100 or so transactions. ETH TPS is 15.
+Scalably (arbitrarily) reads ETH data from Google BigQuery
+ETH TPS is 15.
+
+TODO this partial fn as formatter seems computationally inefficient, ironically I did it for the opposite reason.
 """
 from google.cloud import bigquery
 from pprint import pprint
 from datetime import datetime
+import timeit
 
 
 
 def main():
-    data = get_data_from_big_query(0, 10)
-    formatted_data = get_relevant_info_as_dict(data)
+    start = timeit.default_timer()
+    formatted_data = get_data_from_big_query(0, 10**5)
+    # Note: 10**6 takes 94 secs. 10**5 takes 12 secs.
+    print("10**5 elapsed ", timeit.default_timer() - start)
     with open("../../../var/amount.txt", "w") as outfile:
         outfile.write("\n".join([i['value'] for i in formatted_data]))
 
@@ -17,7 +23,7 @@ def main():
 
 def get_data_from_big_query(starting_from_index, number_of_rows):
     """
-    Read arbitrary number from BigQuery, does NOT scale
+    Read arbitrary number from BigQuery
     """
     client = bigquery.Client.from_service_account_json(
         'scalable-homom-encryp-c5d5f9e88750.json',
@@ -31,34 +37,44 @@ def get_data_from_big_query(starting_from_index, number_of_rows):
         col for col in transactions_table_ref.schema
         if col.name in ('from_address', 'to_address', 'block_number', 'block_timestamp', 'value')
     ]
-    return [
+    data = [
         x for x in client.list_rows(
             transactions_table_ref,
             start_index=starting_from_index,
             selected_fields=schema_subset,
             max_results=number_of_rows)
     ]
+    formatted_data = batch_reformatter(data)
+    return formatted_data
 
 
 
-def get_relevant_info_as_dict(results):
+def get_relevant_info_as_dict(row):
     """
-    Returns relevant info: inputs, outputs, etc. in dict, given dict
-    TODO perhaps make this a fn which only acts on one row, and RF out the rest
+    Returns relevant info: inputs, outputs, etc. in dict, a weird Row() format from BigQuery
     """
-    formatted = []
-    for row in results:
-        dict_row = dict(row)
-        # TODO dict_row['block_timestamp'] = datetime(dict_row['block_timestamp']).utcnow()
-        dict_row['value'] = str(dict_row['value']/10**18) # Store value in ether, converted from wei (1 wei = 10^-18 ETH)
-        formatted.append(dict_row)
-    return formatted
+    # Confirmed this is not a reference, it's deepcopy: https://stackoverflow.com/a/47576546/
+    dict_row = dict(row)
+    # TODO Fix this weirdness, datetime docs are so flipping arcane
+    # dict_row['block_timestamp'] = datetime(dict_row['block_timestamp']).utcnow()
+    # Store value in ether, converted from wei (1 wei = 10^-18 ETH)
+    dict_row['value'] = str(dict_row['value']/10**18)
+    return dict_row
+
+
+
+def batch_reformatter(data, reformat_fn=get_relevant_info_as_dict):
+    formatted_data = []
+    for row in data:
+        formatted_data.append(reformat_fn(row))
+    return formatted_data
 
 
 
 def get_data_from_BigQuery_scalable():
     """
     Microbatch the data to get millions of transactions from a stream of microbatches
+    Store start index? Stateful?
     """
     pass
 
