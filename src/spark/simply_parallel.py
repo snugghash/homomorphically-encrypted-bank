@@ -1,17 +1,25 @@
 """
 Homomorphic encryption implemented by using existing PySEAL. Horizontal scaling. 
+
+Sources: Spark quickstart
+https://www.rittmanmead.com/blog/2017/01/getting-started-with-spark-streaming-with-python-and-kafka/
 """
 from pyspark.sql import SparkSession
+# SparkSession is newer, recommended API over SparkContext
+from pyspark import SparkContext
+from pyspark.streaming import StreamingContext
+from pyspark.streaming.kafka import KafkaUtils
+import json
 from kafka_consumer import kafka_consumer_gen
 import seal
 
-logFile = "input.txt"  # Should be some file on your system
-spark = SparkSession.builder.appName("simply_parallel.py").getOrCreate()
-logData = spark.read.text(logFile).cache()
 
-numAs = logData.filter(logData.value.contains('a')).count()
-numBs = logData.filter(logData.value.contains('b')).count()
 
-print("Lines with a: %i, lines with b: %i" % (numAs, numBs))
+# Streaming test
+sc = SparkContext(appName="simply_parallel_HE")
+sc.setLogLevel("WARN")
 
-spark.stop()
+ssc = StreamingContext(sc, 10)
+kafkaStream = KafkaUtils.createStream(ssc, '', 'spark-streaming', {'ETH-old':1})
+
+kafkaStream.map(lambda datapoint: print(datapoint))
