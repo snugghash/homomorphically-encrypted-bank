@@ -71,12 +71,16 @@ def batch_reformatter(data, reformat_fn=get_relevant_info_as_dict):
 
 
 
-def get_data_from_BigQuery_scalable():
+def get_data_from_BigQuery_continuous_stateful(batch_size):
     """
-    Microbatch the data to get millions of transactions from a stream of microbatches
-    Store start index? Stateful?
+    Microbatch the data to get millions of transactions as a stream of microbatches.
+    Stateful, built as a generator that returns the next batch_size every call to next().
+    TODO add current ETH blockheight instead of infi loop.
     """
-    pass
+    start_index = 0
+    while(True):
+        yield get_data_from_big_query(start_index, batch_size)
+        start_index += batch_size
 
 
 
