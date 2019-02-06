@@ -37,7 +37,7 @@ sc = SparkContext(appName="simply_parallel_HE")
 sc.setLogLevel("WARN")
 
 ssc = StreamingContext(sc, 10)
-kafkaStream = KafkaUtils.createStream(ssc, 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com:2181', 'spark-streaming', {'eth-old':1})
+kafkaStream = KafkaUtils.createStream(ssc, 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com:9092', 'spark-streaming', {'eth-old':1})
 
 #parsed = kafkaStream.map(lambda datapoint: dict(datapoint))
 kafkaStream..pprint()
