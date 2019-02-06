@@ -32,3 +32,5 @@
 - 1850; Three TODOs - Implement Big Poly Array, conversion from ciphertext to it, then the addition. Interprocess communication/savings = nil.
 20190204
 - 1339: Reasons to use Kafka+Spark: good integrations and docuemntation, support present
+20190206
+- 1548; Kafka consumer - timing out when connecting to kafka. Is 9092 the default port?
