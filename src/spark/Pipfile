@@ -10,6 +10,10 @@ prospector = "*"
 pyspark = "*"
 pybind11 = "*"
 confluent-kafka = "*"
+pyyaml = ">=4.2b1"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
