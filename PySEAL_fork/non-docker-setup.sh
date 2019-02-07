@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo rm /var/lib/dpkg/lock
 sudo dpkg --configure -a
 sudo apt-get install --yes python3 \
 	python3-pip \
