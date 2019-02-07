@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo dpkg --configure -a
-sudo apt-get install python3 \
+sudo apt-get install --yes python3 \
 	python3-pip \
 	libdpkg-perl \
 	--no-install-recommends
