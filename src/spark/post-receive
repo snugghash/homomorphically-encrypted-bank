@@ -1,6 +1,6 @@
 # Git post-receive hook for running spark job on cluster
-PYSPARK_PYTHON=python3 spark-submit --master=spark://ec2-34-218-11-141.us-west-2.compute.amazonaws.com:7077 job.py
-PYSPARK_PYTHON=python3 spark-submit --master=spark://ec2-34-218-11-141.us-west-2.compute.amazonaws.com:7077 \
+PYSPARK_PYTHON=python3 spark-submit --master=spark:localhost:7077 job.py
+PYSPARK_PYTHON=python3 spark-submit --master=spark:localhost:7077 \
     --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.0 \
     simply_parallel.py
 #--driver-java-options="-Droot.logger=ERROR,console" \
