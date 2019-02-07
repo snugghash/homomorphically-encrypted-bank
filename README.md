@@ -38,5 +38,6 @@ Calculate difference to a high credit limit, decrypt on client to find the
 * Bank, credit card, credit score based automatic lending decisions for completely trustless financial system
 
 # Installation
+Set up post-receive script to automatically start jobs, otherwise just run post-receive after `ssh`ing into the master.
 
 # Usage
