@@ -11,9 +11,9 @@ sudo apt-get install --yes python3 \
 
 # Make the root lib folders anyone can read
 sudo mkdir -p /SEAL
-sudo chown ubuntu /SEAL
+sudo chown -R ubuntu /SEAL
 cp -r ./SEAL /SEAL
-cp -r ./SEALExamples /SEALExamples
+cp -r ./SEALExamples /SEAL/
 cp -r ./SEALPython /SEAL
 cp -r ./SEALPythonExamples /SEAL
 
