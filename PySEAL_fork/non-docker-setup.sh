@@ -3,12 +3,14 @@ sudo dpkg --configure -a
 sudo apt-get install --yes python3 \
 	python3-pip \
 	libdpkg-perl \
+	cmake \
 	--no-install-recommends
 
 # Make the root lib folders anyone can read
 sudo mkdir -p /SEAL
 sudo chown ubuntu /SEAL
 cp -r ./SEAL /SEAL
+cp -r ./SEALExamples /SEALExamples
 cp -r ./SEALPython /SEAL
 cp -r ./SEALPythonExamples /SEAL
 
