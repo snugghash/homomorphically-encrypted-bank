@@ -32,6 +32,7 @@ make
 # Build SEAL Python wrapper
 cd /SEAL/SEALPython
 pip3 install setuptools
+pip3 install wheel
 pip3 install -r requirements.txt
 git clone https://github.com/pybind/pybind11.git
 cd pybind11
