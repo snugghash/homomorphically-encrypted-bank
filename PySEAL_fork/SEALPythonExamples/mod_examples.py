@@ -50,11 +50,11 @@ def example_basics_i():
 
 	decryptor = Decryptor(context, secret_key)
 
-	value1 = 5;
+	value1 = 11;
 	plain1 = encoder.encode(value1);
 	print("Encoded " + (str)(value1) + " as polynomial " + plain1.to_string() + " (plain1)")
 
-	value2 = -7;
+	value2 = 15;
 	plain2 = encoder.encode(value2);
 	print("Encoded " + (str)(value2) + " as polynomial " + plain2.to_string() + " (plain2)")
 
@@ -86,9 +86,9 @@ def example_basics_i():
 
 	print("Noise budget in -encrypted1 + encrypted2: " + (str)(decryptor.invariant_noise_budget(encrypted1)) + " bits")
 
-	evaluator.multiply(encrypted1, encrypted2)
+	#evaluator.multiply(encrypted1, encrypted2)
 
-	print("Noise budget in (-encrypted1 + encrypted2) * encrypted2: " + (str)(decryptor.invariant_noise_budget(encrypted1)) + " bits")
+	#print("Noise budget in (-encrypted1 + encrypted2) * encrypted2: " + (str)(decryptor.invariant_noise_budget(encrypted1)) + " bits")
 
 	# Now we decrypt and decode our result.
 	plain_result = Plaintext()
