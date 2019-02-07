@@ -5,7 +5,8 @@ sudo apt-get install --yes python3 \
 	python3-pip \
 	libdpkg-perl \
 	cmake \
-	python3-dev
+	python3-dev \
+	python3.5-dev \
 	--no-install-recommends
 
 # Make the root lib folders anyone can read
