@@ -35,18 +35,78 @@ from seal import ChooserEvaluator, \
 	ChooserPoly
 
 
-# Streaming test
-sc = SparkContext(appName="simply_parallel_HE")
-sc.setLogLevel("WARN")
 
-ssc = StreamingContext(sc, 10)
-topics = {'eth-old':1}
-kafka_broker = 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com'
-groupId = 'spark-streaming'
-kafkaStream = KafkaUtils.createStream(ssc, kafka_broker, groupId, topics)
+def simply_parallel():
+	# Streaming test
+	sc = SparkContext(appName="simply_parallel_HE")
+	sc.setLogLevel("WARN")
+	ssc = StreamingContext(sc, 10)
+	topics = {'eth-old':1}
+	kafka_broker = 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com'
+	groupId = 'spark-streaming'
+	kafkaStream = KafkaUtils.createStream(ssc, kafka_broker, groupId, topics)
 
-#parsed = kafkaStream.map(lambda datapoint: dict(datapoint))
-kafkaStream.pprint()
+	#parsed = kafkaStream.map(lambda datapoint: dict(datapoint))
+	kafkaStream.pprint()
 
-ssc.start()
-ssc.awaitTermination()
+	ssc.start()
+	ssc.awaitTermination()
+
+
+
+def do_per_amount(amount):
+	"""
+	Called on every message in the stream
+	"""
+	parms = EncryptionParameters()
+	parms.set_poly_modulus("1x^2048 + 1")
+	parms.set_coeff_modulus(seal.coeff_modulus_128(2048))
+	parms.set_plain_modulus(1 << 8)
+	context = SEALContext(parms)
+
+	# Encode
+	encoder = IntegerEncoder(context.plain_modulus())
+
+	# To create a fresh pair of keys one can call KeyGenerator::generate() at any time.
+	keygen = KeyGenerator(context)
+	public_key = keygen.public_key()
+	secret_key = keygen.secret_key()
+
+	encryptor = Encryptor(context, public_key)
+
+
+	plain1 = encoder.encode(amount)
+
+	# Encrypt
+	encrypted1 = Ciphertext()
+	encryptor.encrypt(plain1, encrypted1)
+
+	# Evaluate
+	evaluator = Evaluator(context)
+	evaluated = evaluate(evaluator, encrypted1)
+
+	# Decrypt and decode
+	decryptor = Decryptor(context, secret_key)
+	plain_result = Plaintext()
+	decryptor.decrypt(evaluated, plain_result)
+	plain_result = (encoder.decode_int32(plain_result)
+
+	# Decode to obtain an integer result.
+	print("Decoded integer: " + (str))
+
+	return decrypted
+
+
+
+def evaluate(evaluator, encrypted_single_amount, subtract_from=15):
+	encoded2 = encoder.encode(subtract_from)
+
+	evaluator.negate(encrypted_single_amount)
+	evaluator.add_plain(encrypted_single_amount, encoded2)
+
+	return encrypted_single_amount
+
+
+
+if __name__ == "__main__":
+	simply_parallel()
