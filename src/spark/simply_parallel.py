@@ -91,9 +91,6 @@ def do_per_amount(amount):
 	decryptor.decrypt(evaluated, plain_result)
 	result = encoder.decode(plain_result)
 
-	# Decode to obtain an integer result.
-	print("Decoded integer: " + (str)result)
-
 	return result
 
 
