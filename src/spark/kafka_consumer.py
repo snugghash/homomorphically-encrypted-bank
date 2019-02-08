@@ -14,10 +14,10 @@ def kafka_consumer_gen(channel_to_sub_to='eth-old'):
     Python generator for consuming from known kafka cluster.
     """
     c = Consumer({
-        'bootstrap.servers': 'ec2-54-187-33-148.us-west-2.compute.amazonaws.com,\
+        'bootstrap.servers': 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com,\
                               ec2-52-40-90-99.us-west-2.compute.amazonaws.com,\
-                              ec2-52-43-209-134.us-west-2.compute.amazonaws.com',
-        #'group.id': 'mygroup',
+                              ec2-34-218-39-83.us-west-2.compute.amazonaws.com',
+        'group.id': 'consumer-test',
         'auto.offset.reset': 'earliest'
     })
     c.subscribe([channel_to_sub_to])
@@ -37,4 +37,5 @@ def kafka_consumer_gen(channel_to_sub_to='eth-old'):
 
 
 if __name__ == "__main__":
-    kafka_consumer_gen()
+    for i in kafka_consumer_gen():
+        print(i)
