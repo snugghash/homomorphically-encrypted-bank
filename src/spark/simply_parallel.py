@@ -46,8 +46,8 @@ def simply_parallel():
 	groupId = 'spark-streaming'
 	kafkaStream = KafkaUtils.createStream(ssc, kafka_broker, groupId, topics)
 
-	#parsed = kafkaStream.map(lambda datapoint: dict(datapoint))
-	kafkaStream.pprint()
+	parsed = kafkaStream.map(lambda datapoint: datapoint[1])
+	parsed.pprint()
 
 	ssc.start()
 	ssc.awaitTermination()
