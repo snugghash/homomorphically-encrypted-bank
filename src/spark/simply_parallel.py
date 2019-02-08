@@ -48,6 +48,7 @@ def simply_parallel():
 
 	parsed = kafkaStream.map(lambda datapoint: float(datapoint[1]))
 	parsed.pprint()
+	print("wololo")
 	parsed.map(do_per_amount).pprint()
 
 	ssc.start()
@@ -59,6 +60,7 @@ def do_per_amount(amount, subtract_from=15):
 	"""
 	Called on every message in the stream
 	"""
+	print("in per amount")
 	parms = EncryptionParameters()
 	parms.set_poly_modulus("1x^2048 + 1")
 	parms.set_coeff_modulus(seal.coeff_modulus_128(2048))
