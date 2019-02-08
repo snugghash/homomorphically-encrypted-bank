@@ -92,7 +92,7 @@ def do_per_amount(amount):
 	plain_result = (encoder.decode(plain_result)
 
 	# Decode to obtain an integer result.
-	print("Decoded integer: " + (str))
+	print("Decoded integer: " + (str) plain_result)
 
 	return decrypted
 
