@@ -41,7 +41,7 @@ sc.setLogLevel("WARN")
 
 ssc = StreamingContext(sc, 10)
 topics = {'eth-old':1}
-kafka_broker = 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com:9092'
+kafka_broker = 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com'
 groupId = 'spark-streaming'
 kafkaStream = KafkaUtils.createStream(ssc, kafka_broker, groupId, topics)
 
