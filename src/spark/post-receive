@@ -1,4 +1,12 @@
-# Git post-receive hook for running spark job on cluster
+# Self-updating git post-receive hook for running spark job on cluster
+echo "post-receive hook!"
+cd ~/homomorphically-encrypted-bank/ || exit
+unset GIT_DIR
+git checkout spark
+cp src/spark/post-receive .git/hooks/post-update
+
+# Run the job
+cd src/spark/
 PYSPARK_PYTHON=python3 spark-submit --master=spark://0.0.0.0:7077 job.py
 PYSPARK_PYTHON=python3 spark-submit --master=spark://0.0.0.0:7077 test_linking_SEAL.py
 PYSPARK_PYTHON=python3 spark-submit --master=spark://0.0.0.0:7077 \
@@ -8,3 +16,6 @@ PYSPARK_PYTHON=python3 spark-submit --master=spark://0.0.0.0:7077 \
     #--packages org.apache.spark:spark-streaming-kafka-0-10_2.11:2.3.1 \
 #--driver-java-options="-Droot.logger=ERROR,console" \
 #--conf "spark.driver.extraJavaOptions=-Dlog4jspark.root.logger=WARN" \
+
+# Go back to pushable branch, because fucking LTS releases don't have latest git and conseuently no option to allow the damn checkout-out-branch-push-thing
+git checkout -B tmp
