@@ -37,4 +37,7 @@
 20190207
 - 1800;
 20190208
-- 0940; Built test for confluent kafka consumption works
+- 0940; Built test for confluent kafka consumption works, 
+- 0950; Even works without specifing port lol
+- 1000; Spark-workers use a separate context/environment, no SEAL cpython library to use. Failing to import seal.
+- 1250; Pass the .so cpython compiled file as a "--file" option. Works.
