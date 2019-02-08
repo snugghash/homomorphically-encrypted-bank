@@ -67,28 +67,15 @@ def example_basics_i():
 
 	print("Encrypting plain2: ")
 	encryptor.encrypt(plain2, encrypted2)
-	print("Done (encrypted2)")
+	print("Done (encrypted2)", str(encrypted1))
 
-	# To illustrate the concept of noise budget, we print the budgets in the fresh
-	# encryptions.
-	print("Noise budget in encrypted1: " + (str)(decryptor.invariant_noise_budget(encrypted1)) + " bits")
-	print("Noise budget in encrypted2: " + (str)(decryptor.invariant_noise_budget(encrypted2)) + " bits")
-
-	# As a simple example, we compute (-encrypted1 + encrypted2) * encrypted2.
-
-	# Negation is a unary operation.
 	evaluator.negate(encrypted1)
-
 	# Negation does not consume any noise budget.
 	print("Noise budget in -encrypted1: " + (str)(decryptor.invariant_noise_budget(encrypted1)) + " bits")
-
-	evaluator.add(encrypted1, encrypted2)
-
-	print("Noise budget in -encrypted1 + encrypted2: " + (str)(decryptor.invariant_noise_budget(encrypted1)) + " bits")
-
-	#evaluator.multiply(encrypted1, encrypted2)
-
-	#print("Noise budget in (-encrypted1 + encrypted2) * encrypted2: " + (str)(decryptor.invariant_noise_budget(encrypted1)) + " bits")
+	encoded2 = encoder.encode(value2)
+	print("Encoded " + (str)(value2) + " as polynomial " + plain2.to_string() + " (plain2)")
+	evaluator.add_plain(encrypted1, encoded2)
+	print("Done")
 
 	# Now we decrypt and decode our result.
 	plain_result = Plaintext()
