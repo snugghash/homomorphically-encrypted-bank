@@ -41,3 +41,5 @@
 - 0950; Even works without specifing port lol
 - 1000; Spark-workers use a separate context/environment, no SEAL cpython library to use. Failing to import seal.
 - 1250; Pass the .so cpython compiled file as a "--file" option. Works.
+- 1340; Error where the map simply hangs without even calling the keygen function.
+- 1354; Solved, unknown solution. Only add debug prints and timers and it just gets solved? Got a transient socket error, also unsolved, with resolved itself after restart.
