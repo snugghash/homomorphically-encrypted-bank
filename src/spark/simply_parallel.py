@@ -37,7 +37,10 @@ sc = SparkContext(appName="simply_parallel_HE")
 sc.setLogLevel("WARN")
 
 ssc = StreamingContext(sc, 10)
-kafkaStream = KafkaUtils.createDirectStream(ssc, [{'eth-old':1}], {'metadata.broker.list': 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com:9092'}, 'spark-streaming')
+topics = {'eth-old':1}
+kafka_broker = 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com:9092'
+groupId = 'spark-streaming'
+kafkaStream = KafkaUtils.createStream(ssc, kafka_broker, groupId, topics)
 
 #parsed = kafkaStream.map(lambda datapoint: dict(datapoint))
 kafkaStream.pprint()
