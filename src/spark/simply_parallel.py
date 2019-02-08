@@ -55,7 +55,7 @@ def simply_parallel():
 
 
 
-def do_per_amount(amount):
+def do_per_amount(amount, subtract_from=15):
 	"""
 	Called on every message in the stream
 	"""
@@ -77,6 +77,7 @@ def do_per_amount(amount):
 
 
 	plain1 = encoder.encode(amount)
+	encoded2 = encoder.encode(subtract_from)
 
 	# Encrypt
 	encrypted1 = Ciphertext(parms)
@@ -84,7 +85,7 @@ def do_per_amount(amount):
 
 	# Evaluate
 	evaluator = Evaluator(context)
-	evaluated = evaluate(evaluator, encrypted1)
+	evaluated = evaluate_subtraction_from_plain(evaluator, encrypted1, encoded2)
 
 	# Decrypt and decode
 	decryptor = Decryptor(context, secret_key)
@@ -96,11 +97,13 @@ def do_per_amount(amount):
 
 
 
-def evaluate(evaluator, encrypted_single_amount, subtract_from=15):
-	encoded2 = encoder.encode(subtract_from)
-
+def evaluate_subtraction_from_plain(evaluator, encrypted_single_amount, subtract_from_plaintext):
+	"""
+	Expects encoded but not encrypted plaintext as arg
+	TODO Why do I even need this fn? It provides no generality/composability.
+	"""
 	evaluator.negate(encrypted_single_amount)
-	evaluator.add_plain(encrypted_single_amount, encoded2)
+	evaluator.add_plain(encrypted_single_amount, subtract_from_plaintext)
 
 	return encrypted_single_amount
 
