@@ -3,6 +3,9 @@ Homomorphic encryption implemented by using existing PySEAL. Horizontal scaling.
 
 Sources: Spark quickstart
 https://www.rittmanmead.com/blog/2017/01/getting-started-with-spark-streaming-with-python-and-kafka/
+TODO look into pass-by-ref or pass-by-value of the C++ objects and memory. \n
+TODO SEAL does everything in-place, \n
+TODO what happens when we convert to functional proggramming?
 """
 from pyspark.sql import SparkSession
 # SparkSession is newer, recommended API over SparkContext

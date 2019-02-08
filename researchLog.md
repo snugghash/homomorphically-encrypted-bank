@@ -34,3 +34,7 @@
 - 1339: Reasons to use Kafka+Spark: good integrations and docuemntation, support present
 20190206
 - 1548; Kafka consumer - timing out when connecting to kafka. Is 9092 the default port?
+20190207
+- 1800;
+20190208
+- 0940; Built test for confluent kafka consumption works
