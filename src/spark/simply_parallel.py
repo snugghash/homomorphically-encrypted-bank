@@ -33,6 +33,7 @@ from seal import ChooserEvaluator, \
 	ChooserEncoder, \
 	ChooserEvaluator, \
 	ChooserPoly
+from timeit import default_timer
 
 
 
@@ -49,6 +50,9 @@ def simply_parallel():
 	parsed = kafkaStream.map(lambda datapoint: float(datapoint[1]))
 	parsed.pprint()
 	print("wololo")
+	start = default_timer() # TODO extract to test/experiment
+	print(do_per_amount(10))
+	print("It took "+ str(default_timer() - start))
 	parsed.map(do_per_amount).pprint()
 
 	ssc.start()
