@@ -89,7 +89,7 @@ def do_per_amount(amount):
 	decryptor = Decryptor(context, secret_key)
 	plain_result = Plaintext()
 	decryptor.decrypt(evaluated, plain_result)
-	plain_result = (encoder.decode(plain_result)
+	plain_result = (encoder.decode(plain_result))
 
 	# Decode to obtain an integer result.
 	print("Decoded integer: " + (str) plain_result)
