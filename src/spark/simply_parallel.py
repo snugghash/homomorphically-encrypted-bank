@@ -48,6 +48,7 @@ def simply_parallel():
 
 	parsed = kafkaStream.map(lambda datapoint: float(datapoint[1]))
 	parsed.pprint()
+	parsed.map(do_per_amount).pprint()
 
 	ssc.start()
 	ssc.awaitTermination()
