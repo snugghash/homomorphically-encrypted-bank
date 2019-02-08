@@ -65,7 +65,7 @@ def do_per_amount(amount):
 	context = SEALContext(parms)
 
 	# Encode
-	encoder = IntegerEncoder(context.plain_modulus())
+	encoder = FractionalEncoder(context.plain_modulus(), context.poly_modulus(), 64, 32, 3)
 
 	# To create a fresh pair of keys one can call KeyGenerator::generate() at any time.
 	keygen = KeyGenerator(context)
@@ -78,7 +78,7 @@ def do_per_amount(amount):
 	plain1 = encoder.encode(amount)
 
 	# Encrypt
-	encrypted1 = Ciphertext()
+	encrypted1 = Ciphertext(parms)
 	encryptor.encrypt(plain1, encrypted1)
 
 	# Evaluate
@@ -89,7 +89,7 @@ def do_per_amount(amount):
 	decryptor = Decryptor(context, secret_key)
 	plain_result = Plaintext()
 	decryptor.decrypt(evaluated, plain_result)
-	plain_result = (encoder.decode_int32(plain_result)
+	plain_result = (encoder.decode(plain_result)
 
 	# Decode to obtain an integer result.
 	print("Decoded integer: " + (str))
