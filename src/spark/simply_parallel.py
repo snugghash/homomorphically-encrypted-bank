@@ -99,7 +99,7 @@ def do_per_amount(amount, subtract_from=15):
 	decryptor.decrypt(evaluated, plain_result)
 	result = encoder.decode(plain_result)
 
-	return result
+	return "Amount left = " + str(result)
 
 
 
