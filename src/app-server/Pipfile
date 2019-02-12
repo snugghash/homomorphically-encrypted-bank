@@ -15,6 +15,7 @@ flask-openid = "*"
 flask-testing = "*"
 flask-user = "*"
 flask-webtest = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
