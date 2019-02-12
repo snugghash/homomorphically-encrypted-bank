@@ -37,7 +37,7 @@ def kafka_consumer_gen(channel_to_sub_to='eth-old'):
 
 
 if __name__ == "__main__":
-    consumer_gen = kafka_consume_gen()
+    consumer_gen = kafka_consumer_gen()
     for _ in range(10):
         print('Producing...')
         next(consumer_gen)
