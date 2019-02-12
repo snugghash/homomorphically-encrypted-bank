@@ -49,7 +49,6 @@ def simply_parallel():
 
 	parsed = kafkaStream.map(lambda datapoint: float(datapoint[1]))
 	parsed.pprint()
-	print("wololo")
 	start = default_timer() # TODO extract to test/experiment
 	print(do_per_amount(10))
 	print("It took "+ str(default_timer() - start))
@@ -64,7 +63,7 @@ def do_per_amount(amount, subtract_from=15):
 	"""
 	Called on every message in the stream
 	"""
-	print("in per amount")
+	print("Transaction amount ", amount)
 	parms = EncryptionParameters()
 	parms.set_poly_modulus("1x^2048 + 1")
 	parms.set_coeff_modulus(seal.coeff_modulus_128(2048))
@@ -99,8 +98,9 @@ def do_per_amount(amount, subtract_from=15):
 	decryptor.decrypt(evaluated, plain_result)
 	result = encoder.decode(plain_result)
 
-	return "Amount left = " + str(result)
-
+	str_result = "Amount left = " + str(result)
+	print(str_result)
+	return  str_result
 
 
 def evaluate_subtraction_from_plain(evaluator, encrypted_single_amount, subtract_from_plaintext):
