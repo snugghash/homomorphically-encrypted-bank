@@ -45,7 +45,7 @@ def simply_parallel():
 	# Streaming test
 	sc = SparkContext(appName="simply_parallel_HE")
 	sc.setLogLevel("WARN")
-	ssc = StreamingContext(sc, 10)
+	ssc = StreamingContext(sc, 2)
 	topics = ['eth-old']
 	kafka_broker = 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com:9092,\
 					ec2-52-40-90-99.us-west-2.compute.amazonaws.com:9092,\
