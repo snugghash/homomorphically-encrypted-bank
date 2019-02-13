@@ -56,8 +56,9 @@ def simply_parallel():
 	directKafkaStream.pprint()
 	parsed = directKafkaStream.map(lambda x: float(x[1]))
 	parsed.pprint()
-	parsed.map(do_per_amount).pprint()
-	#parsed.foreachRDD(output_set_of_transactions)
+	result = parsed.map(do_per_amount)
+	result.pprint()
+	#result.foreachRDD(lambda rdd: rdd.foreachPartition(output_set_of_transactions))
 
 	ssc.start()
 	ssc.awaitTermination()
@@ -78,6 +79,14 @@ def simply_parallel():
 	directKafkaStream \
 		.transform(storeOffsetRanges) \
 		.foreachRDD(printOffsetRanges)
+
+
+
+# def output_set_of_transactions(record_list)
+#     connection = createNewConnection()
+#     for record in record_list:
+#         connection.send(record)
+#     connection.close()
 
 
 
