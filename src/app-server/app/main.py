@@ -12,12 +12,19 @@ def hello_world():
 
 @app.route('/consume')
 def consume():
-    consumer = kafka_consumer_gen()
+    consumer = kafka_consumer_gen('eth-old')
     value_array = []
     for _ in range(10):
         value_array.append(next(consumer))
     response = json.dumps(value_array)
-    return response
+
+
+    consumer = kafka_consumer_gen('eth-decrypted')
+    decrypted = []
+    for _ in range(10):
+        decrypted.append(next(consumer))
+    response_decrypted = json.dumps(decrypted)
+    return "Original: " + response + "\n\nDecrypted: " + response_decrypted
 
 
 
