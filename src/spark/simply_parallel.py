@@ -38,24 +38,46 @@ from timeit import default_timer
 
 
 def simply_parallel():
+	start = default_timer() # TODO extract to test/experiment
+	print(do_per_amount(10))
+	print("It took "+ str(default_timer() - start))
+
 	# Streaming test
 	sc = SparkContext(appName="simply_parallel_HE")
 	sc.setLogLevel("WARN")
 	ssc = StreamingContext(sc, 10)
-	topics = {'eth-old':1}
-	kafka_broker = 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com'
+	topics = ['eth-old']
+	kafka_broker = 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com:9092,\
+					ec2-52-40-90-99.us-west-2.compute.amazonaws.com:9092,\
+					ec2-34-218-39-83.us-west-2.compute.amazonaws.com:9092'
 	groupId = 'spark-streaming'
-	kafkaStream = KafkaUtils.createStream(ssc, kafka_broker, groupId, topics)
 
-	parsed = kafkaStream.map(lambda datapoint: float(datapoint[1]))
+	directKafkaStream = KafkaUtils.createDirectStream(ssc, topics, {"metadata.broker.list": kafka_broker})
+	directKafkaStream.pprint()
+	parsed = directKafkaStream.map(lambda x: float(x[1]))
 	parsed.pprint()
-	start = default_timer() # TODO extract to test/experiment
-	print(do_per_amount(10))
-	print("It took "+ str(default_timer() - start))
-	parsed.map(do_per_amount).pprint()
+	parsed.map(do_per_amount)
+	#parsed.foreachRDD(output_set_of_transactions)
 
 	ssc.start()
 	ssc.awaitTermination()
+
+	# TODO
+	# Source: https://spark.apache.org/docs/2.3.1/streaming-kafka-0-8-integration.html
+	offsetRanges = []
+
+	def storeOffsetRanges(rdd):
+		global offsetRanges
+		offsetRanges = rdd.offsetRanges()
+		return rdd
+
+	def printOffsetRanges(rdd):
+		for o in offsetRanges:
+			print("%s %s %s %s" % (o.topic, o.partition, o.fromOffset, o.untilOffset))
+
+	directKafkaStream \
+		.transform(storeOffsetRanges) \
+		.foreachRDD(printOffsetRanges)
 
 
 

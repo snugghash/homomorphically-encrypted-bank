@@ -43,3 +43,5 @@
 - 1250; Pass the .so cpython compiled file as a "--file" option. Works.
 - 1340; Error where the map simply hangs without even calling the keygen function.
 - 1354; Solved, unknown solution. Only add debug prints and timers and it just gets solved? Got a transient socket error, also unsolved, with resolved itself after restart.
+20190213
+- 0600; Check the different formats (adn requirement of port specification) for createStream and createDirectStream
