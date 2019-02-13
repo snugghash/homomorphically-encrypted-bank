@@ -45,3 +45,4 @@
 - 1354; Solved, unknown solution. Only add debug prints and timers and it just gets solved? Got a transient socket error, also unsolved, with resolved itself after restart.
 20190213
 - 0600; Check the different formats (adn requirement of port specification) for createStream and createDirectStream
+- 0846; Need to confirm that we can't just retrive the stdout, need to pipe to kafka and create another consumer on the app?
