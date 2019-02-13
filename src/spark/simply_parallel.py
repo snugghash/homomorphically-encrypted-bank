@@ -56,7 +56,7 @@ def simply_parallel():
 	directKafkaStream.pprint()
 	parsed = directKafkaStream.map(lambda x: float(x[1]))
 	parsed.pprint()
-	parsed.map(do_per_amount)
+	parsed.map(do_per_amount).pprint()
 	#parsed.foreachRDD(output_set_of_transactions)
 
 	ssc.start()
