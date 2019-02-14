@@ -14,6 +14,7 @@ from pyspark.streaming import StreamingContext
 from pyspark.streaming.kafka import KafkaUtils
 import json
 from kafka_consumer import kafka_consumer_gen
+from kafka_producer import (producer, send_blob_to_prod)
 import seal
 from seal import ChooserEvaluator, \
 	Ciphertext, \
@@ -58,7 +59,7 @@ def simply_parallel():
 	parsed.pprint()
 	result = parsed.map(do_per_amount)
 	result.pprint()
-	#result.foreachRDD(lambda rdd: rdd.foreachPartition(output_set_of_transactions))
+	result.foreachRDD(lambda rdd: rdd.foreachPartition(output_set_of_transactions))
 
 	ssc.start()
 	ssc.awaitTermination()
@@ -82,11 +83,10 @@ def simply_parallel():
 
 
 
-# def output_set_of_transactions(record_list)
-#     connection = createNewConnection()
-#     for record in record_list:
-#         connection.send(record)
-#     connection.close()
+def output_set_of_transactions(record_list)
+    connection = producer()
+    for record in record_list:
+        send_blob_to_prod(connection, 'eth-decrypted', record)
 
 
 
