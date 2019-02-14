@@ -5,9 +5,12 @@ from flask import json
 from flask import make_response
 app = Flask(__name__)
 
+
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
+
 
 
 @app.route('/consume')
@@ -18,13 +21,35 @@ def consume():
         value_array.append(next(consumer))
     response = json.dumps(value_array)
 
-
     consumer = kafka_consumer_gen('eth-decrypted')
     decrypted = []
     for _ in range(10):
         decrypted.append(next(consumer))
     response_decrypted = json.dumps(decrypted)
+
     return "Original: " + response + "\n\nDecrypted: " + response_decrypted
+
+
+
+@app.route('/consume_in')
+def consume_in():
+    consumer = kafka_consumer_gen('eth-old')
+    value_array = []
+    for _ in range(10):
+        value_array.append(next(consumer))
+    response = json.dumps(value_array)
+    return "Original: " + response
+
+
+
+@app.route('/consume_out')
+def consume_out():
+    consumer = kafka_consumer_gen('eth-decrypted')
+    decrypted = []
+    for _ in range(10):
+        decrypted.append(next(consumer))
+    response_decrypted = json.dumps(decrypted)
+    return "\n\nDecrypted: " + response_decrypted
 
 
 
