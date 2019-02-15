@@ -83,7 +83,7 @@ def simply_parallel():
 
 
 
-def output_set_of_transactions(record_list)
+def output_set_of_transactions(record_list):
     connection = producer()
     for record in record_list:
         send_blob_to_prod(connection, 'eth-decrypted', record)
