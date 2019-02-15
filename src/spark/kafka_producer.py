@@ -16,9 +16,9 @@ def delivery_report(err, msg):
 
 
 def producer(server_string='localhost,\
-            ec2-54-187-33-148.us-west-2.compute.amazonaws.com,\
-            ec2-52-40-90-99.us-west-2.compute.amazonaws.com,\
-            ec2-52-43-209-134.us-west-2.compute.amazonaws.com'):
+        ec2-52-11-165-61.us-west-2.compute.amazonaws.com,\
+        ec2-52-10-3-49.us-west-2.compute.amazonaws.com,\
+        ec2-34-218-39-83.us-west-2.compute.amazonaws.com'):
     p = Producer({'bootstrap.servers': server_string})
     return p
 
