@@ -24,7 +24,7 @@ def producer(server_string='localhost,\
 
 
 
-def send_blob_to_prod(p, topic, data, callback=delivery_report)
+def send_blob_to_prod(p, topic, data, callback=delivery_report):
     p.produce(topic, data.encode('utf-8'), callback=callback)
     p.flush()
 
