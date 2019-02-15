@@ -7,10 +7,10 @@ from read_from_BigQuery import get_data_from_BigQuery_continuous_stateful
 
 
 # TODO move to env files
-p = Producer({'bootstrap.servers': 'localhost,\
-        ec2-54-187-33-148.us-west-2.compute.amazonaws.com,\
-        ec2-52-40-90-99.us-west-2.compute.amazonaws.com,\
-        ec2-52-43-209-134.us-west-2.compute.amazonaws.com'})
+p = Producer({'bootstrap.servers':
+        'ec2-52-11-165-61.us-west-2.compute.amazonaws.com,\
+        ec2-52-10-3-49.us-west-2.compute.amazonaws.com,\
+        ec2-34-218-39-83.us-west-2.compute.amazonaws.com'})
 
 
 

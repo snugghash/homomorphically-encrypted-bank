@@ -9,7 +9,7 @@ from confluent_kafka import Consumer, KafkaError
 
 
 
-def kafka_consumer_gen(channel_to_sub_to='eth-old'):
+def kafka_consumer_gen(channel_to_sub_to='eth-old', consumer_group_id='consumer-test'):
     """
     Python generator for consuming from known kafka cluster.
     """
@@ -17,7 +17,7 @@ def kafka_consumer_gen(channel_to_sub_to='eth-old'):
         'bootstrap.servers': 'ec2-52-11-165-61.us-west-2.compute.amazonaws.com,\
                               ec2-52-40-90-99.us-west-2.compute.amazonaws.com,\
                               ec2-34-218-39-83.us-west-2.compute.amazonaws.com',
-        'group.id': 'consumer-test',
+        'group.id': consumer_group_id,
         'auto.offset.reset': 'earliest'
     })
     c.subscribe([channel_to_sub_to])
