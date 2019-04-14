@@ -19,6 +19,7 @@ flask-webtest = "*"
 requests = "*"
 confluent-kafka = "*"
 pyyaml = ">=4.2b1"
+Jinja2 = ">=2.10.1"
 
 [requires]
 python_version = "3.7"
