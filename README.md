@@ -39,5 +39,6 @@ Calculate difference to a high credit limit, decrypt on client to find the
 
 # Installation
 Set up post-receive script to automatically start jobs, otherwise just run post-receive after `ssh`ing into the master.
+* github.com/snugghash/pegasus is a fork of a set of shell scripts that make use of AWS CLI to provision servers. I modified them to add kafka/spark configs, fork this repo, set up kafka topic, partitions, and set up post receive. 
 
 # Usage
